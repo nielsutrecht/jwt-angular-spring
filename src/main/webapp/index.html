@@ -1,0 +1,56 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>JSON Web Token / AngularJS / Spring Boot example</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="libs/bootstrap/css/bootstrap.css">
+    <script src="libs/jquery/jquery.js"></script>
+    <script src="libs/bootstrap/js/bootstrap.js"></script>
+    <script src="libs/angular/angular.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<div class="container" ng-controller='MainCtrl'>
+	<h1>{{greeting}}</h1>
+	<div ng-show="!loggedIn()">
+		Please log in (tom and sally are valid names)</br>
+		<form ng-submit="login()">
+			Username: <input type="text" ng-model="userName"/><span><input type="submit" value="Login"/>
+		</form>
+	</div>
+	<div class="alert alert-danger" role="alert" ng-show="error.data.message">
+	  <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+	  <span class="sr-only">Error:</span>
+	  {{error.data.message}}
+	</div>	
+	<div ng-show="loggedIn()">
+		<div class="row">
+			<div class="col-md-6">
+				<h3><span class="label label-success">Success!</span> Welcome {{userName}}</h3>
+	 			<a href ng-click="logout()">(logout)</a>
+			</div>
+			<div class="col-md-4">
+	 	<div class="row header">
+			<div class="col-sm-4">{{userName}} is a</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">User</div>
+			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleUser"></span></div>
+		</div>
+		<div class="row">
+			<div class="col-sm-2">Admin</div>
+			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleAdmin"></span></div>
+		</div>	
+		<div class="row">
+			<div class="col-sm-2">Foo</div>
+			<div class="col-sm-2"><span class="glyphicon glyphicon-ok" aria-hidden="true" ng-show="roleFoo"></span></div>
+		</div>				
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
