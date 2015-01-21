@@ -1,6 +1,5 @@
 package com.nibado.example.jwtangspr;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -14,22 +13,23 @@ import org.springframework.web.bind.annotation.RestController;
 @EnableAutoConfiguration
 @ComponentScan
 public class WebApplication extends SpringBootServletInitializer {
-    @Override
-    protected SpringApplicationBuilder configure(final SpringApplicationBuilder application) {
-        return application;
-    }
+	@Override
+	protected SpringApplicationBuilder configure(
+			final SpringApplicationBuilder application) {
+		return application;
+	}
 
-    @Bean
-    public FilterRegistrationBean jwtFilter() {
-        final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
-        registrationBean.setFilter(new JwtFilter());
-        registrationBean.addUrlPatterns("/admin/*");
+	@Bean
+	public FilterRegistrationBean jwtFilter() {
+		final FilterRegistrationBean registrationBean = new FilterRegistrationBean();
+		registrationBean.setFilter(new JwtFilter());
+		registrationBean.addUrlPatterns("/api/*");
 
-        return registrationBean;
-    }
+		return registrationBean;
+	}
 
-    public static void main(final String[] args) throws Exception {
-        SpringApplication.run(WebApplication.class, args);
-    }
+	public static void main(final String[] args) throws Exception {
+		SpringApplication.run(WebApplication.class, args);
+	}
 
 }
