@@ -1,7 +1,7 @@
 var appModule = angular.module('myApp', []); 
 
-appModule.controller('MainCtrl', ['mainService','$scope','$http',
-        function(mainService, $scope, $http) {
+appModule.controller('MainCtrl', ['mainService','$scope',
+        function(mainService, $scope) {
             $scope.greeting = 'Welcome to the JSON Web Token / AngularJR / Spring example!';
             $scope.token = null;
             $scope.error = null;
@@ -10,32 +10,32 @@ appModule.controller('MainCtrl', ['mainService','$scope','$http',
             $scope.roleFoo = false;
  
             $scope.login = function() {
-            	$scope.error = null;
-            	mainService.login($scope.userName).then(function(token) {
-            		$scope.token = token;
-            		$http.defaults.headers.common.Authorization = 'Bearer ' + token;
-            		$scope.checkRoles();
-            	},
-            	function(error){
-            		$scope.error = error
-            		$scope.userName = '';
-            	});
+                $scope.error = null;
+                mainService.login($scope.userName).then(function(token) {
+                    $scope.token = token;
+                    $http.defaults.headers.common.Authorization = 'Bearer ' + token;
+                    $scope.checkRoles();
+                },
+                function(error){
+                    $scope.error = error
+                    $scope.userName = '';
+                });
             }
             
             $scope.checkRoles = function() {
-            	mainService.hasRole('user').then(function(user) {$scope.roleUser = user});
-            	mainService.hasRole('admin').then(function(admin) {$scope.roleAdmin = admin});
-            	mainService.hasRole('foo').then(function(foo) {$scope.roleFoo = foo});
+                mainService.hasRole('user').then(function(user) {$scope.roleUser = user});
+                mainService.hasRole('admin').then(function(admin) {$scope.roleAdmin = admin});
+                mainService.hasRole('foo').then(function(foo) {$scope.roleFoo = foo});
             }
             
             $scope.logout = function() {
-            	$scope.userName = '';
-            	$scope.token = null;
-            	$http.defaults.headers.common.Authorization = '';
+                $scope.userName = '';
+                $scope.token = null;
+                $http.defaults.headers.common.Authorization = '';
             }
             
             $scope.loggedIn = function() {
-            	return $scope.token !== null;
+                return $scope.token !== null;
             }
         } ]);
 
@@ -50,9 +50,9 @@ appModule.service('mainService', function($http) {
         },
         
         hasRole : function(role) {
-        	return $http.get('/api/role/' + role).then(function(response){
-        		return response.data;
-        	});
+            return $http.get('/api/role/' + role).then(function(response){
+                return response.data;
+            });
         }
     };
 });
