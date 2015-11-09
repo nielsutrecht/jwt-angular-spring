@@ -14,7 +14,7 @@ In this example this key is fixed ("secretkey") but in a real life situations th
 
 ## Server side: Spring Boot
 
-I like using Sprint (Boot) to create RESTful services. On the server site the JWT signing is done in the user/login REST call in UserController. It contains a tiny 'database' of 2 users, one of which has the 'admin' rights. The verification is done in a Filter (JwtFilter): it filters everty request that matches "/api/*". If a correct token isn't found an exception is thrown. If a correct token is found, the claims object is added to the Http Request object and can be used in any REST endpoint (as shown in ApiController).
+I like using Spring (Boot) to create RESTful services. On the server site the JWT signing is done in the user/login REST call in UserController. It contains a tiny 'database' of 2 users, one of which has the 'admin' rights. The verification is done in a Filter (JwtFilter): it filters everty request that matches "/api/*". If a correct token isn't found an exception is thrown. If a correct token is found, the claims object is added to the Http Request object and can be used in any REST endpoint (as shown in ApiController).
 
 The heavy lifting for JWT signing is done by the more than excellent [Java JWT](https://github.com/jwtk/jjwt) library.
 
